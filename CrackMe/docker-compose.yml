@@ -1,0 +1,8 @@
+version: "3"
+services:
+  server:
+    build: .
+    container_name: CrackMe
+    ports:
+      - "8889:8080"
+    restart: always

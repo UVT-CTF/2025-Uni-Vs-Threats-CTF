@@ -1,0 +1,1 @@
+node compiler encrypt.asm encrypt && node runner
