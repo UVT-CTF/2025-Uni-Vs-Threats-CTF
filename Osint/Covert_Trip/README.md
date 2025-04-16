@@ -1,4 +1,6 @@
-###Covert_trip 
+
+### Covert_Trip
+
 > author: Andra B, category: Social
 
 ### Description
@@ -20,7 +22,8 @@ Flag format:
 For example for street Quai de la Rapée and price 67.25 the flag is:
 UVT{Quai_de_la_Rapee_67.25}
 
-### Flag <details>
+### Flag 
+<details>
   <summary>Click to reveal the flag</summary>
   UVT{Quai_de_la_Megisserie_12.60}
 </details>
