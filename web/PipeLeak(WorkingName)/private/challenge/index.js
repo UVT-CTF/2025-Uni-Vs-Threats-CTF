@@ -31,11 +31,11 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Welcome', message: 'Hello, EJS + Express!', posts: posts.toReversed() });
+    res.render('index', { posts: posts.toReversed() });
 });
 
 app.get('/post', (req, res) => {
-    res.status(200).render('create', { title: 'Post' });
+    res.status(200).render('create', {});
 });
 
 app.get('/posts/:id', (req, res) => {
@@ -47,8 +47,7 @@ app.get('/posts/:id', (req, res) => {
         return;
     }
 
-    console.log('Post found: ' + posts[id]);
-    res.status(200).render('post', { title: 'Post', post: posts[id] });
+    res.status(200).render('post', { post: posts[id] });
 });
 
 app.get('/report/:id', (req, res) => {
@@ -83,7 +82,8 @@ function disableCors(res) {
     res.setHeader('Access-Control-Allow-Headers', '');
 }
 
-app.get('/doHttpReq', (req, res) => {
+// TODO: remove next sprint
+app.get('/admin/doHttpReq', (req, res) => {
     try {
         disableCors(res);
         if ((`${req.headers.origin}` != 'null'
@@ -129,7 +129,7 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Blog is up and running on port ${PORT}!`);
 });
 
 // Gotta stay safe out here..
@@ -142,10 +142,6 @@ export const verifyReportWithAI = async (url) => {
     });
 
     const page = await browser.newPage();
-
-    page.on('console', msg => {
-        console.log(`PAGE LOG: ${msg.text()}`);
-    });
 
     await guardPage(page);
 

@@ -1,9 +1,17 @@
 <%- include('partials/header') %>
 
-    <form action="/post" method="POST">
-        <textarea name="content" rows="6" cols="40" placeholder="Write your thoughts here!" required></textarea>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-
-    </form>
+<section class="post-form">
+  <form action="/post" method="POST">
+    <label for="content">New Post:</label><br>
+    <textarea
+      id="content"
+      name="content"
+      rows="6"
+      cols="50"
+      placeholder="Write your thoughts here!"
+      required
+    ></textarea>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+</section>

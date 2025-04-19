@@ -1,14 +1,19 @@
+
 <%- include('partials/header') %>
 
-    <p>
+<section class="posts-list">
     <ul>
         <% posts.forEach(function(post, index) { %>
-            <li>
-                <%= index + 1 %>. <%= post.content %> ~ <b>
-                            <%= post.from %>
-                        </b> from <%- post.location %>
-                <a href="/report/<%= index %>">Report</a>
+            <li class="post-item">
+                <span class="post-number">
+                    <%= index + 1 %>.
+                    <a href="/report/<%= index %>" class="report-link">Report</a>
+                </span>
+                <span class="post-content"><%= post.content %></span>
+                <span class="post-meta">
+                    ~ <strong><%= post.from %></strong> from <%= post.location %>
+                </span>
             </li>
-            <% }) %>
+        <% }) %>
     </ul>
-    </p>
+</section>
