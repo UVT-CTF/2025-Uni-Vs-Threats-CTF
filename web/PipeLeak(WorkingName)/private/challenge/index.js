@@ -42,7 +42,6 @@ app.get('/posts/:id', (req, res) => {
     const id = parseInt(req.params.id);
 
     if (isNaN(id) || id < 0 || id >= posts.length || !posts[id]) {
-        console.log('Not found: ' + req.params.id);
         res.status(404).render('404');
         return;
     }
