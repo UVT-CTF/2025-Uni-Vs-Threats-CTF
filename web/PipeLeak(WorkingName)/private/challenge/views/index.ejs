@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+    <p>
+    <ul>
+        <% posts.forEach(function(post, index) { %>
+            <li>
+                <%= index + 1 %>. <%= post.content %> ~ <b>
+                            <%= post.from %>
+                        </b> from <%- post.location %>
+                <a href="/report/<%= index %>">Report</a>
+            </li>
+            <% }) %>
+    </ul>
+    </p>
