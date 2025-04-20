@@ -13,6 +13,7 @@ let pwInput = document.getElementById('pw');
 let submit = document.getElementById('submit');
 
 submit.onclick = function() {
+    result.classList.add('visible');
     if (pwInput.value && check(pwInput.value)) {
         result.innerText = 'Correct!';
     } else {

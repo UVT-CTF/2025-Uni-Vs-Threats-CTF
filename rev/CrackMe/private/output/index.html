@@ -1,24 +1,117 @@
-<html>
-    <head>
-        <title>Crack Me</title>
-        <style>
-            .wrapper {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                gap: 0.5rem;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="wrapper">
-            <h3>Crack Me!</h3>
-            <input id="pw" placeholder="Enter secret password here">
-            <button id="submit">Check Password</button>
-            <p id="result"></p>
-        </div>
-        <script src="main.js"></script>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crack Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gradient-start: #667eea;
+      --gradient-end: #764ba2;
+      --text-color: #ffffff;
+      --input-bg: rgba(255, 255, 255, 0.2);
+      --input-border: rgba(255, 255, 255, 0.5);
+      --btn-bg: rgba(255, 255, 255, 0.3);
+      --btn-hover: rgba(255, 255, 255, 0.5);
+      --radius: 0.5rem;
+      --transition: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    h3 {
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius);
+      background: var(--input-bg);
+      color: var(--text-color);
+      outline: none;
+      font-size: 1rem;
+      transition: border-color var(--transition);
+    }
+
+    input:focus {
+      border-color: var(--text-color);
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--btn-bg);
+      color: var(--text-color);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    button:hover {
+      background: var(--btn-hover);
+      transform: translateY(-2px);
+    }
+
+    #result {
+      font-size: 0.95rem;
+      height: 1.2rem;
+      margin-top: 0.5rem;
+      visibility: hidden;
+      transition: visibility var(--transition);
+    }
+
+    #result.visible {
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h3>Crack Me!</h3>
+    <input id="pw" type="password" placeholder="Enter secret password">
+    <button id="submit">Check Password</button>
+    <p id="result"></p>
+  </div>
+  <script src="main.js"></script>
+</body>
 </html>

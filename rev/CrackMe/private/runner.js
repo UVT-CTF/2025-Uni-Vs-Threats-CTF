@@ -103,10 +103,13 @@ let obfuscationResult = JavaScriptObfuscator.obfuscate(jsTemplate, {
     stringArrayShuffle: true,
     splitStrings: true,
     stringArrayThreshold: 1,
-    debugProtection: true,
-    selfDefending: true,
+    debugProtection: false,
+    selfDefending: false,
     stringArrayCallsTransform: true,
-    stringArrayRotate: true
+    stringArrayRotate: true,
+    renameProperties: true,
+    renameGlobals: true,
+    renamePropertiesMode: 'unsafe'
 });
 
 fs.writeFileSync('output/main.js', obfuscationResult.getObfuscatedCode());
