@@ -1,12 +1,11 @@
 import express from 'express';
-import path from 'path';
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-const FLAG = fs.readFileSync('../flag.txt');
+const FLAG = process.env.FLAG || 'UVT{a_flag_goes_here}';
 
 // TODO: Boss wants logs to have that oomph
 let LOG_DATA = '<h1>Server logs</h1><br>'
@@ -59,7 +58,7 @@ app.get('/report/:id', (req, res) => {
 
     res.status(200).send('Post has been reported, admin will take a look!');
 
-    verifyReportWithAI('http://localhost:8080/posts/' + id);
+    verifyReportWithAI(`http://localhost:${PORT}/posts/${id}`);
 });
 
 app.post('/post', (req, res) => {
