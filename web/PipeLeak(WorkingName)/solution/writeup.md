@@ -7,7 +7,7 @@ By reporting a certain post, the admin bot will execute the XSS code.
 
 ## Step 2: Bruteforcing chrome CDP port
 
-See solution.js and attacker.js
+See solution.js and payload.html
 
 - Some endpoint is required to delay page loading (e.g. https://httpbin.org/delay/5)
 - Some endpoint is required for data exfiltration (e.g. https://webhook.site/)
@@ -16,6 +16,7 @@ See solution.js and attacker.js
 ## Step 3: Polluting the log file
 
 - First, send a request to localhost:8080/<title> and then to localhost:8080/</title>
+- Note that the Cookie value has to be passed to go to the right log.htm
 - This will ensure that the flag is leaked through the log.htm page.
 
 ## Step 4: Interact with CDP

@@ -1,6 +1,8 @@
 import express from 'express';
 import puppeteer from 'puppeteer';
 import fs from 'fs';
+import { randomBytes } from 'crypto';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -10,61 +12,98 @@ const FLAG = process.env.FLAG || 'UVT{a_flag_goes_here}';
 // TODO: Boss wants logs to have that oomph
 let LOG_DATA = '<h1>Server logs</h1><br>'
 
-let posts = [
+const defaultPosts = [
     {
         from: 'admin',
-        content: 'Welcome to my blog!',
+        content: '{´◕ ◡ ◕｀} Hello world!',
         location: 'Earth'
     }
 ]
+
+let userData = {};
+
+function createNewUser() {
+    let id = randomBytes(16).toString('hex');
+
+    userData[id] = JSON.parse(JSON.stringify(defaultPosts));
+    return id;
+}
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use((req, res, next) => {
-    logger(`${req.method} ${decodeURIComponent(req.url)}`);
+    let userId = req.cookies['user'];
+    console.log(userId, req.url);
+    if (userId && userData[userId])
+        logger(userId, `${req.method} ${decodeURIComponent(req.url)}`);
     next();
 });
 
 app.get('/', (req, res) => {
-    res.render('index', { posts: posts.toReversed() });
+    let userId = req.cookies['user'];
+
+    if (!userId || !userData[userId]) {
+        userId = createNewUser();
+        res.cookie('user', userId, {
+            maxAge: 24 * 60 * 60 * 1000
+        });
+    }
+
+    res.render('index', { posts: userData[userId].toReversed() });
 });
 
 app.get('/post', (req, res) => {
     res.status(200).render('create', {});
 });
 
-app.get('/posts/:id', (req, res) => {
+app.get('/posts/:user/:id', (req, res) => {
     const id = parseInt(req.params.id);
+    const user = req.params.user;
 
-    if (isNaN(id) || id < 0 || id >= posts.length || !posts[id]) {
+    if (!userData[user] || isNaN(id) || id < 0 || id >= userData[user].length || !userData[user][id]) {
         res.status(404).render('404');
         return;
     }
 
-    res.status(200).render('post', { post: posts[id] });
+    res.status(200).render('post', { post: userData[user][id] });
 });
 
-app.get('/report/:id', (req, res) => {
+app.get('/share/:id', (req, res) => {
+    let userId = req.cookies['user'];
+
+    if (!userId || !userData[userId]) {
+        res.status(400).send('(╯°□°)╯︵ ┻━┻ You are not authenticated');
+        return;
+    }
+
     const id = parseInt(req.params.id);
 
-    if (isNaN(id) || id < 0 || id >= posts.length || !posts[id]) {
+    if (isNaN(id) || id < 0 || id >= userData[userId].length || !userData[userId][id]) {
         res.status(404).render('404');
         return;
     }
 
-    res.status(200).send('Post has been reported, admin will take a look!');
+    res.status(200).send('◕ ◡ ◕ Note has been shared, admin will take a look!');
 
-    verifyReportWithAI(`http://localhost:${PORT}/posts/${id}`);
+    checkNoteWithAI(`http://localhost:${PORT}/posts/${userId}/${id}`);
 });
 
 app.post('/post', (req, res) => {
+    let userId = req.cookies['user'];
+
+    if (!userId || !userData[userId]) {
+        res.status(400).send('(╯°□°)╯︵ ┻━┻ You are not authenticated');
+        return;
+    }
+
     const content = req.body.content;
     const location = req.body.location;
-    posts.push({
+    userData[userId].push({
         from: 'user',
         content: content,
         location: location || 'Earth'
@@ -90,22 +129,20 @@ app.get('/admin/doHttpReq', (req, res) => {
             || req.headers['sec-fetch-site'] === 'same-site'
             || req.headers['sec-fetch-site'] === 'same-origin'
         )
-            throw new Error('Request is not secure- cannot call this endpoint from the browser');
+            throw new Error('(ノಠ ∩ಠ)ノ彡( \\o°o)\\ Request is not secure- cannot call this endpoint from the browser');
 
         let url = req.query.url ?? '';
         let method = req.query.method ?? 'GET';
 
         if (method !== 'GET' && req.headers['sec-fetch-mode'] === 'navigate') {
-            throw new Error('What?')
+            throw new Error('(゜-゜) What?')
         }
 
         if (!allowedMethods.includes(method))
-            throw new Error('Method not allowed');
+            throw new Error('(」゜ロ゜)」Method not allowed');
 
-        if (url.length > 100)
-            throw new Error('URL is too long');
-
-        logger(method + ' ' + url + ' ' + FLAG);
+        if (url.length > 128)
+            throw new Error('(」゜ロ゜)」URL is too long');
 
         fetch(url, {
             method: method
@@ -127,13 +164,13 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Blog is up and running on port ${PORT}!`);
+    console.log(`Notes App is up and running on port ${PORT}!`);
 });
 
 // Gotta stay safe out here..
 const allowedProtocols = ['http://', 'https://', 'about:blank'];
 
-export const verifyReportWithAI = async (url) => {
+export const checkNoteWithAI = async (url) => {
     const browser = await puppeteer.launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -189,9 +226,10 @@ async function guardPage(page) {
     }
 }
 
-function logger(data) {
+function logger(userId, data) {
     // TODO: format nicely
     LOG_DATA += data + '<br>' + 'Flag: ' + FLAG + '<br>';
 
-    fs.writeFileSync('./log.htm', LOG_DATA);
+    try { fs.mkdirSync('./logs'); } catch (e) { };
+    fs.writeFileSync(`./logs/log-${userId}.htm`, LOG_DATA);
 }

