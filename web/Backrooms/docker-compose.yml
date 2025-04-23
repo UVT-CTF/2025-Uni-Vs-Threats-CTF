@@ -5,7 +5,7 @@ services:
     container_name: PipeLeakTest
     environment:
       - PORT=8080
-      - FLAG="UVT{n0w_y0ur3_th1nk1ng_w1th_p0rt4ls}"
+      - FLAG="UVT{st0p_sn00p1n9_4r0und}"
     ports:
       - "8080:8080"
     restart: always

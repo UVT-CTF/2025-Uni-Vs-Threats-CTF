@@ -38,7 +38,6 @@ app.use(cookieParser());
 
 app.use((req, res, next) => {
     let userId = req.cookies['user'];
-    console.log(userId, req.url);
     if (userId && userData[userId])
         logger(userId, `${req.method} ${decodeURIComponent(req.url)}`);
     next();
