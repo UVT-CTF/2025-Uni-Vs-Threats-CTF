@@ -1,0 +1,10 @@
+version: "3"
+services:
+  server:
+    environment:
+        FLAG: UVT{th3_n0t3s_w3r3_1ns1d3_us_4ll_4l0ng}
+    build: .
+    container_name: MusicLover
+    ports:
+      - "60001:8889"
+    restart: always
