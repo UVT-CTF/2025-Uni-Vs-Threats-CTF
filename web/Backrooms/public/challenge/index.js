@@ -5,12 +5,13 @@ import { randomBytes } from 'crypto';
 import cookieParser from 'cookie-parser';
 
 const app = express();
-const PORT = process.env.PORT || 8080;
 
+const PORT = process.env.PORT || 8080;
 const FLAG = process.env.FLAG || 'UVT{a_flag_goes_here}';
 
 // TODO: Boss wants logs to have that oomph
-let LOG_DATA = '<h1>Server logs</h1><br>'
+const defaultLogHeader = '<h1>Server logs</h1><br>'
+let logUserData = {};
 
 const defaultPosts = [
     {
@@ -26,6 +27,7 @@ function createNewUser() {
     let id = randomBytes(16).toString('hex');
 
     userData[id] = JSON.parse(JSON.stringify(defaultPosts));
+    logUserData[id] = defaultLogHeader.slice(0);
     return id;
 }
 
@@ -227,8 +229,8 @@ async function guardPage(page) {
 
 function logger(userId, data) {
     // TODO: format nicely
-    LOG_DATA += data + '<br>' + 'Flag: ' + FLAG + '<br>';
+    logUserData[userId] += data + '<br>' + 'Flag: ' + FLAG + '<br>';
 
     try { fs.mkdirSync('./logs'); } catch (e) { };
-    fs.writeFileSync(`./logs/log-${userId}.htm`, LOG_DATA);
+    fs.writeFileSync(`./logs/log-${userId}.htm`, logUserData[userId]);
 }

@@ -2,7 +2,7 @@ version: "3"
 services:
   server:
     build: public
-    container_name: PipeLeakTest
+    container_name: BackroomsChallenge
     environment:
       - PORT=8080
       - FLAG="UVT{st0p_sn00p1n9_4r0und}"
