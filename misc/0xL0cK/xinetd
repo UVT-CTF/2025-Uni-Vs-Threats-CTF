@@ -1,0 +1,15 @@
+service 0xLOcK
+{
+    disable = no
+    socket_type = stream
+    protocol = tcp
+    port = 8654
+    wait = no
+    user = player
+    type = UNLISTED
+    server = /usr/local/bin/python3
+    server_args = /home/player/private/0xL0cK.py
+    bind = 0.0.0.0
+    per_source = 10
+    flags = REUSE
+}
