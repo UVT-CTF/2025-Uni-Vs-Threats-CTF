@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follow the Whispers...</title>
+    <link rel="stylesheet" href="/static/style.css">
+    
+    <style>
+        @font-face {
+            font-family: 'CicadaFont';
+            src: url('/static/cicada.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .hidden-message {
+            font-family: 'CicadaFont', sans-serif;
+            font-size: 24px;
+            color: #888;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .hidden-message:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>Follow the whispers...</h1>
+    <p>The path is obscured, but the truth is near.</p>
+
+    <div class="image-grid">
+        {% for image in images %}
+            <img src="{{ image }}" alt="Liber Primus Image">
+        {% endfor %}
+    </div>
+
+    <p class="hidden-message">The key is in the letters themselves...</p>
+</body>
+</html>

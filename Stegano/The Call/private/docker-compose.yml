@@ -1,0 +1,7 @@
+version: '3'
+services:
+  webchallenge:
+    build: .
+    ports:
+      - "60002:60002"
+    restart: unless-stopped
