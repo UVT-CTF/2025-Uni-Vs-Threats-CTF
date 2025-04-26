@@ -1,4 +1,4 @@
-# Shuffling
+# Quantum Detanglement
 > author: taniusca, category: crypto
 
 ### Description
