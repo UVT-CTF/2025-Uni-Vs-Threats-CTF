@@ -1,4 +1,4 @@
-# Shuffling
+# Detective School
 > author: taniusca, category: OSINT
 
 ### Description
