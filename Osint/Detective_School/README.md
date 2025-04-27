@@ -24,7 +24,7 @@ Flag format: (for example, if the station is Shinjuku and the line is Sobu) `UVT
 </details>
 
 ### Property Investigator
-Find the address of the condo (nr. and street), last name of the person living in the same block and the car's license plate.
+Find the address of the condo (nr. and street), last name of the mentioned person (living in the same building) and the mentioned car's license plate.
 Flag format: (for example, if the address is 55 Fifth Avenue, name is John S. Doe) `UVT{55-Fifth-Ave_Doe_ABC1234}`
 #### Flag
 <details>
