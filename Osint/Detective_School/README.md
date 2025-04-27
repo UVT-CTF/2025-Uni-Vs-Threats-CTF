@@ -15,7 +15,7 @@ Flag format: `UVT{Street-Name_Dacia_01-january}`
 </details>
 
 ### GEOINT Specialist
-Find the station and line (english names) that Mr. Tanaka likely used.
+Find the station and line (english names) in the picture. We believe Mr. Tanaka might have used them.
 Flag format: (for example, if the station is Shinjuku and the line is Sobu) `UVT{Shinjuku_Station_Sobu_Line}`
 #### Flag
 <details>
