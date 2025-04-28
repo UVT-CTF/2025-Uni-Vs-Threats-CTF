@@ -1,0 +1,42 @@
+services:
+  web:
+    build: .
+    container_name: php-app
+    ports:
+      - "8080:80"  
+    volumes:
+      - ./private/src:/var/www/html
+      - ./private/db:/var/www/html/private/db
+    networks:
+      - ctf-network
+    depends_on:
+      - db
+    restart: unless-stopped 
+
+  db:
+    image: mysql:8-oracle
+    platform: linux/arm64/v8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: sqli_challenge
+      MYSQL_USER: search_user
+      MYSQL_PASSWORD: passwordidk
+      MYSQL_ROOT_HOST: '%' 
+    networks:
+      - ctf-network
+    volumes:
+      - ./private/init.sql:/docker-entrypoint-initdb.d/init.sql 
+      - ./private/init_password_reset.sql:/docker-entrypoint-initdb.d/init_password_reset.sql 
+    command:
+      - --innodb-use-native-aio=0  # Disable Native AIO for better compatibility
+      - --skip-name-resolve  # Skip host resolution for faster connections
+      - --bind-address=0.0.0.0  # Allow connections from all hosts (needed for Docker communication)
+
+volumes:
+  mysql_data:  # Define a persistent volume to store MySQL data
+
+networks:
+  ctf-network:
+    driver: bridge  # Using a bridge network for communication between containers
+    internal: false  # External network to allow communication between containers

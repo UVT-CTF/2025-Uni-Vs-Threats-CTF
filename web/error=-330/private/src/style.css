@@ -1,0 +1,143 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Fira Code', 'Ubuntu Mono', monospace;
+    background-color: #000;
+    color: #ffd9ec;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Cute Floating Flowers */
+body::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-repeat: repeat;
+    background-size: 300px;
+    opacity: 0.02; /* even softer now */
+    animation: floatFlowers 60s linear infinite;
+    z-index: 0;
+}
+
+.container {
+    max-width: 850px;
+    margin: 80px auto;
+    background-color: rgba(26, 0, 26, 0.95); /* almost solid, semi-transparent */
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+    border: 2px dashed #ff69b4;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(5px); /* adds a glass-like blur */
+}
+
+h1 {
+    color: #ff99cc;
+    font-size: 3em;
+    text-align: center;
+    text-shadow: 0 0 5px #ff99cc88;
+    margin-bottom: 20px;
+}
+
+a {
+    display: inline-block;
+    margin: 10px auto;
+    padding: 12px 25px;
+    background: linear-gradient(145deg, #ff69b4, #ff1493);
+    color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 0 12px #ff69b480;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    transform: scale(1.05);
+    background: #ff85c1;
+    box-shadow: 0 0 20px #ff69b4aa;
+}
+
+p {
+    text-align: center;
+    color: #ffccf2;
+    font-size: 1.2em;
+}
+
+button, input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #ff69b4;
+    border-radius: 8px;
+    background: #2a002a;
+    color: #fff;
+    font-family: inherit;
+    box-shadow: 0 0 10px #ff69b444 inset;
+}
+
+button {
+    background-color: #ff69b4;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ff1493;
+    box-shadow: 0 0 15px #ff69b4cc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background-color: #2a002a;
+    color: #ffe0f0;
+}
+
+th, td {
+    border: 1px solid #ff69b4;
+    padding: 10px;
+}
+
+th {
+    background-color: #4d003f;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: #ff69b4;
+    border-radius: 8px;
+}
+
+.center-button {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.login-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(145deg, #ff69b4, #ff1493);
+    color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 15px #ff69b4aa;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s;
+}
+
+.login-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #ff69b4ee;
+}
+
