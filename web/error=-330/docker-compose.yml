@@ -15,7 +15,7 @@ services:
 
   db:
     image: mysql:8-oracle
-    platform: linux/arm64/v8
+    # platform: linux/arm64/v8
     container_name: mysql-db
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
