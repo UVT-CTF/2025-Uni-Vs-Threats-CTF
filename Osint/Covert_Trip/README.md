@@ -1,7 +1,7 @@
 
 ### Covert_Trip
 
-> author: Andra B, category: Social
+> author: AndraB, category: Social
 
 ### Description
 A mysterious informant was last seen at a secret meeting point, a café 

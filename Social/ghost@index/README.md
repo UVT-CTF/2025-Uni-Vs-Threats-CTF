@@ -1,5 +1,5 @@
 # ghost@index
-> author: Andra B, category: Social
+> author: AndraB, category: Social
 
 ### Description
 All you have is her nickname: Natya Ivanova.
