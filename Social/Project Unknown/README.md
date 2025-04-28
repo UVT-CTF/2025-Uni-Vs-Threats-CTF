@@ -10,5 +10,5 @@ Track down Larry Quinn—a dedicated Product Manager who loves spending time on 
 <details>
   <summary>Click to reveal the flag</summary>
 
-  UVT{Codename_Project_}
+  UVT{Codename_Project_Hastings}
 </details>
