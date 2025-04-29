@@ -1,4 +1,4 @@
-service Let's_Dance
+service Lets_Dance
 {
     disable = no
     type        = UNLISTED
