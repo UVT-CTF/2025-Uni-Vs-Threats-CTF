@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 from sympy.physics.quantum import TensorProduct
 from sympy import Matrix, sqrt
 import random

@@ -1,0 +1,10 @@
+version: "3"
+services:
+  server:
+    environment:
+        FLAG: UVT{Idk_Y3t}
+    build: .
+    container_name: Quantum_Detanglement
+    ports:
+      - "60004:8889"
+    restart: always
