@@ -1,0 +1,10 @@
+version: "3"
+services:
+  server:
+    environment:
+        FLAG: UVT{Idk_Y3t}
+    build: .
+    container_name: Let's_Dance
+    ports:
+      - "60005:8889"
+    restart: always

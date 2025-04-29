@@ -2,6 +2,9 @@
 from sympy.physics.quantum import TensorProduct
 from sympy import Matrix, sqrt
 import random
+import os
+
+FLAG = os.environ['FLAG']
 
 # |0> and |1>
 ket_0 = Matrix([[1], [0]])
@@ -41,7 +44,7 @@ def main():
     state = random.choice(Bell_states)
     print("Initial state = ", state)
     
-    message = "It seems that you've just cracked another challenge! A little math isn't that scary for you, is it not? Congratulations! UVT{M4st3r_0f_m4trix_mu1tip1ic4ti0n}"
+    message = "It seems that you've just cracked another challenge! A little math isn't that scary for you, is it not? Congratulations! " + FLAG
     bit_stream = binary(message)
         
     for i in range(0, len(bit_stream), 2):
