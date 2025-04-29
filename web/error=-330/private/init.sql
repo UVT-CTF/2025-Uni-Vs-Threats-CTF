@@ -101,6 +101,15 @@ INSERT INTO secrets (flag) VALUES
 ('Some queries fetch data. Others fetch power.')  ,
 ('You don’t exploit the database. You seduce it—with carefully crafted strings and the promise of chaos.'),
 ('UVT{Th3_sy5t3M_7ru5Ts_1tS_oWn_9r4Mmar_..._'),
+('In shadows deep the blind man calls,
+He taps the keys and nothing stalls.
+But when he asks in silent night,
+The world holds breath—then springs to life.
+
+If stillness lingers five heartbeats long,
+You’ve whispered truths with hidden song.
+When time itself convulses slow,
+Your secret’s found in the echo.'),
 ('You don`t query the system—you interrogate it.'),
 ('The database wasn’t built for lies'),
 ('Some queries aren’t questions.'),
