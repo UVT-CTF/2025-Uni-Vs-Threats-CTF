@@ -33,15 +33,15 @@ INSERT INTO products (name, price, description) VALUES
 ('Smart Speaker', 99.99, 'Voice assistant with premium sound');
 
 INSERT INTO secrets (flag) VALUES
-('You don’t ask for access. You carve it out'),
+('You don`t ask for access. You carve it out'),
 ('Sanitization is a prayer. Some inputs are born heretical'),
 ('Sanitize or die.'),
 ('Databases hate liars. So lie better.'),
 ('Every input field is a locked door. Some pick themselves.'),
 ('Some strings terminate more than queries.'),
 ('Input sanitization is a myth. The moment you realize that, the database is already yours.'),
-('A UNION is more than a join—it’s a forced marriage of data, bending tables to your will.'),
-('Authentication is a joke. ‘admin’--’ is the punchline.'),
+('A UNION is more than a join—it`s a forced marriage of data, bending tables to your will.'),
+('Authentication is a joke. `admin`--’ is the punchline.'),
 ('You don’t hack the system. You ask politely—in a language it can’t refuse.'),
 ('Some queries are born innocent. Others are born to destroy.'),
 ('The database speaks in truths. Your job is to make it lie.'),  
