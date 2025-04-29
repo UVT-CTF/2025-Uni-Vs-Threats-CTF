@@ -2,7 +2,7 @@ version: "3"
 services:
   server:
     environment:
-        FLAG: UVT{Idk_Y3t}
+        FLAG: UVT{M4st3r_0f_m4trix_mu1tip1ic4ti0n}
     build: .
     container_name: Quantum_Detanglement
     ports:

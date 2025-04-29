@@ -1,9 +1,12 @@
+#!/usr/local/bin/python3
 from Crypto.Util.number import bytes_to_long
 from Crypto.Util.Padding import pad
 from Crypto.Cipher import Salsa20
 import secrets
 import random
+import os
 
+FLAG = os.environ['FLAG']
 k = secrets.token_bytes(32)
 n = secrets.token_bytes(8)
 
@@ -28,7 +31,6 @@ def encrypt(x):
 
 if __name__ == "__main__":
     move = bytes(get_salsa_move(), encoding='utf-8')
-    flag = b'UVT{f4k3_fl4g}'
 
     print("ct1 = ", encrypt(move))
-    print("ct2 = ", encrypt(flag))
+    print("ct2 = ", encrypt(FLAG))

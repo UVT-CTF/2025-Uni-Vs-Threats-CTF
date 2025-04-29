@@ -2,7 +2,7 @@ version: "3"
 services:
   server:
     environment:
-        FLAG: UVT{Idk_Y3t}
+        FLAG: UVT{ju5t_f33l_th3_r1thm}
     build: .
     container_name: Let's_Dance
     ports:
