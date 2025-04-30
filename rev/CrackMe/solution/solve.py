@@ -6,6 +6,7 @@ def to_signed(n):
 def js_remainder(a, b):
     return a - b * math.trunc(a / b)
 
+# https://gist.github.com/tommyettinger/46a874533244883189143505d203312c
 def next_rand(seed):
     seed = (seed + 0x9e3779b9) & 0xFFFFFFFF
     seed ^= seed >> 16
@@ -43,12 +44,9 @@ def decrypt_flag(encrypted_flag):
     
     return flag
 
-# Example usage:
 encrypted_flag = [
-    99, 211, 84, 44, 123,
-    207, 191, 189, 125, 157,
-    158, 125, 194, 221, 47,
-    80
+    48,32,83,245,235,124,151,6,39,92,222,143,240,123,151,155,39,242,236,47,13
 ]
+
 decrypted = decrypt_flag(encrypted_flag)
-print("".join(chr(x) for x in decrypted))  # Should print "UVT{crackmetest}"
+print("".join(chr(x) for x in decrypted))  

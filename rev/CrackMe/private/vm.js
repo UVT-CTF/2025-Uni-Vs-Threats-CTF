@@ -13,7 +13,7 @@ function NetReader(buffer) {
     this.strState = 0x17;
 }
 
-NetReader.prototype.reachedEnd = function () {
+NetReader.prototype.reachedEnd = function() {
     return this.offset >= this.data.byteLength;
 }
 
@@ -21,7 +21,7 @@ NetReader.prototype.reachedEnd = function () {
  * Reads a uint8
  * @returns {number}
  */
-NetReader.prototype.readUInt8 = function () {
+NetReader.prototype.readUInt8 = function() {
     if (this.len - this.offset < 1) return;
     let value = this.data.getUint8(this.offset);
     this.offset++;
@@ -32,7 +32,7 @@ NetReader.prototype.readUInt8 = function () {
  * Reads a uint16
  * @returns {number}
  */
-NetReader.prototype.readUInt16 = function () {
+NetReader.prototype.readUInt16 = function() {
     if (this.len - this.offset < 2) return;
     let value = this.data.getUint16(this.offset, false);
     this.offset += 2;
@@ -43,7 +43,7 @@ NetReader.prototype.readUInt16 = function () {
  * Reads a float32
  * @returns {number}
  */
-NetReader.prototype.readFloat32 = function () {
+NetReader.prototype.readFloat32 = function() {
     if (this.len - this.offset < 4) return;
     let value = this.data.getFloat32(this.offset, false);
     this.offset += 4;
@@ -54,7 +54,7 @@ NetReader.prototype.readFloat32 = function () {
  * Reads a int16
  * @returns {number}
  */
-NetReader.prototype.readInt16 = function () {
+NetReader.prototype.readInt16 = function() {
     if (this.len - this.offset < 2) return;
     let value = this.data.getInt16(this.offset, false);
     this.offset += 2;
@@ -65,14 +65,14 @@ NetReader.prototype.readInt16 = function () {
  * Reads a uint32
  * @returns {number}
  */
-NetReader.prototype.readUInt32 = function () {
+NetReader.prototype.readUInt32 = function() {
     if (this.len - this.offset < 4) return;
     let value = this.data.getUint32(this.offset, false);
     this.offset += 4;
     return value;
 };
 
-NetReader.prototype.readInt32 = function () {
+NetReader.prototype.readInt32 = function() {
     if (this.len - this.offset < 4) return;
     let value = this.data.getInt32(this.offset, false);
     this.offset += 4;
@@ -83,7 +83,7 @@ NetReader.prototype.readInt32 = function () {
  * Reads a string (Internally a list of Uint16 characters)
  * @returns {string}
  */
-NetReader.prototype.readString = function () {
+NetReader.prototype.readString = function() {
     let final = '';
     let amount = this.readUInt16() ^ 15821;
     let lastChar = 0;
@@ -96,7 +96,7 @@ NetReader.prototype.readString = function () {
     return final;
 };
 
-NetReader.prototype.alignStream = function (alignment) {
+NetReader.prototype.alignStream = function(alignment) {
     while (this.offset % alignment !== 0)
         this.readUInt8();
 };
@@ -104,7 +104,7 @@ NetReader.prototype.alignStream = function (alignment) {
 function executeVMCode(codeBuffer, args = []) {
     let variableMap = {};
     let extId = 0;
-    
+
     for (let arg of args)
         variableMap[++extId] = arg;
 
@@ -119,13 +119,6 @@ function executeVMCode(codeBuffer, args = []) {
                 return reader.readFloat32();
         }
     }
-
-    const version = reader.readUInt16();
-
-    reader.alignStream(8);
-
-    if (version > 180)
-        throw new Error('error');
 
     while (!reader.reachedEnd()) {
         let instrId = reader.readUInt8() ^ 174;

@@ -1,8 +1,6 @@
 const fs = require('fs');
 const { netWriter } = require('./network_io');
 
-const CUR_VERSION = 180;
-
 const file = fs.readFileSync(process.argv[2]).toString();
 
 let lines = file.split('\n');
@@ -75,9 +73,6 @@ const CMD_MAP = {
     'LSRVAR': 31,
     'STORETOARRAY': 32
 }
-
-netWriter.writeUInt16(CUR_VERSION);
-netWriter.alignStream(8);
 
 for (let line of lines) {
     let cmd = line.trim();
