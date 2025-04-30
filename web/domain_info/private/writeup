@@ -1,0 +1,5 @@
+Abuse whois upload to provide malicious php code and upload it using 
+
+nc 127.0.0.1
+
+<malicious cod>
