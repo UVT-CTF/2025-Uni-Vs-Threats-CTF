@@ -32,12 +32,13 @@ cat dumps/file._kind-reminder_.dat
 
 The password is found in one of these files:
 ```
-!!c4nN0L0ng3rIgn0r3Th1s
+c4nN0L0ng3rIgn0r3Th1s@
+
 ```
 
 5. Extract the archive:
 ```
-7z x dumps/<archive-file-name>.dat -p"!!c4nN0L0ng3rIgn0r3Th1s"
+7z x dumps/<archive-file-name>.dat -p"c4nN0L0ng3rIgn0r3Th1s@"
 ```
 
 The archive contains:
