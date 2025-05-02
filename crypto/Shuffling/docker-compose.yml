@@ -2,7 +2,7 @@ version: "3"
 services:
   server:
     environment:
-        FLAG: UVT{Idk_Y3t}
+        FLAG: UVT{1_l1ke_t0_m0v3_1t_m0v3_i7}
     build: .
     container_name: Shuffling
     ports:
