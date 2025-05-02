@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -32,8 +33,8 @@ func ReadLinkPath(path string) (string, error) {
 	return target, nil
 }
 
-// Sometimes i need the full path of the file for debugging
-func LinkHandler(w http.ResponseWriter, r *http.Request) {
+func LinkPathHandler(w http.ResponseWriter, r *http.Request) {
+	// same access checks as your /link handler
 	if !IsLocalhost(r) {
 		http.Error(w, "Forbidden", http.StatusForbidden)
 		return
@@ -42,12 +43,19 @@ func LinkHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userPath := r.URL.Query().Get("path")
-	if userPath == "" {
-		http.Error(w, "Missing path parameter", http.StatusBadRequest)
+	// strip the prefix, then percent-decode
+	raw := strings.TrimPrefix(r.URL.Path, "/linkpath/")
+	if raw == "" {
+		http.Error(w, "Missing linkpath", http.StatusBadRequest)
+		return
+	}
+	userPath, err := url.PathUnescape(raw)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Bad escaped path: %v", err), http.StatusBadRequest)
 		return
 	}
 
+	// now read the symlink
 	target, err := ReadLinkPath(userPath)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error: %v", err), http.StatusInternalServerError)
