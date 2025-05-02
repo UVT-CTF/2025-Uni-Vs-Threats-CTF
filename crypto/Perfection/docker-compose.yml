@@ -1,0 +1,10 @@
+version: "3"
+services:
+  server:
+    environment:
+        FLAG: UVT{prngs_4r3_v3ry_c00l}
+    build: .
+    container_name: perfection
+    ports:
+      - "60006:8889"
+    restart: always
