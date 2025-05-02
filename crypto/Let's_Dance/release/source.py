@@ -6,7 +6,7 @@ import secrets
 import random
 import os
 
-FLAG = os.environ['FLAG']
+FLAG = os.environ['FLAG'].encode()
 k = secrets.token_bytes(32)
 n = secrets.token_bytes(8)
 
