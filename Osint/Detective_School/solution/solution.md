@@ -4,7 +4,7 @@
 As the description sugests, use the command `sherlock` for the given username.
 `sherlock laurajohnsonbusiness`
 
-Test the returned links: instagram and pastebin are valid users. From instagram bio, go to the X account.
+Test the returned links: Instagram and Pastebin are valid users. From Instagram bio, find the X account.
 Tasks: https://x.com/LauraJohns22375
 Resources: https://pastebin.com/u/laurajohnsonbusiness
 
@@ -18,8 +18,8 @@ https://granger.com/0161751-vache-cow-in-the-bus-in-paris-april-27-1966--adverti
 https://www.gettyimages.com/detail/news-photo/pierrette-la-vache-ambassadrice-de-la-marque-de-lait-yolait-news-photo/1264066653
 
 ## GEOINT Specialist
-The landmarks are: cinema (left of the picture), station (right of the picture and story - "Going for a ride", task description) and hospital or clinic (from the story - "doctor's appointment").
-Using Overpass Turbo, found in the pastebin resources, under "GEOINT" category, we can query stations from Tokyo close to cinemas and hospitals.
+The landmarks are: cinema (left hand side of the picture), station (right hand side of the picture and the story - "Going for a ride", task description) and hospital or clinic (from the story - "doctor's appointment").
+Using Overpass Turbo (found in the Pastebin resources) under "GEOINT" category, we can query stations from Tokyo close to cinemas and hospitals.
 For example, this script returns the correct station.
 ```
 [out:json][timeout:300];
