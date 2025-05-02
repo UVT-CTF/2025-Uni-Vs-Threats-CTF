@@ -1,13 +1,11 @@
 <?php
-$servername = "db"; // The service name for MySQL container in docker-compose
-$username = "root";  // MySQL username
-$password = "rootpass";  // MySQL password
-$dbname = "sqli_challenge"; // MySQL database name
+// connect.php
+$servername = "db";
+$username   = "search_user";
+$password   = "passwordidk";
+$dbname     = "sqli_challenge";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
