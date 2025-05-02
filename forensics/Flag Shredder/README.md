@@ -1,4 +1,4 @@
-# Flag Shreder
+# Flag Shredder
 > author: MrProperCTF, category: forensics
 
 ### Description
