@@ -1,20 +1,20 @@
 # Solution
-Given a memory dump `cornelia-memory.raw`, we analyze it using volatility3:
+Given a memory dump `cornelia-memory.raw` (after unzipping the archive) we analyze it using volatility3:
 
 1. Scan for files:
 ```
-sudo python3 vol.py -f cornelia-memory.raw windows.filescan
+sudo python3 vol.py -f cornelias-memory.raw windows.filescan
 ```
 
 2. Filter for relevant filenames:
 ```
-sudo python3 vol.py -f cornelia-memory.raw windows.filescan | grep -i cornelia  
-sudo python3 vol.py -f cornelia-memory.raw windows.filescan | grep -i sawat
+sudo python3 vol.py -f cornelias-memory.raw windows.filescan | grep -i cornelia  
+sudo python3 vol.py -f cornelias-memory.raw windows.filescan | grep -i sawat
 ```
 
 3. Dump the identified files (replacing `<address>` with the virtual address):
 ```
-sudo python3 vol.py -f cornelia-memory.raw -o dumps windows.dumpfiles --virtaddr <address>
+sudo python3 vol.py -f cornelias-memory.raw -o dumps windows.dumpfiles --virtaddr <address>
 ```
 
 Recovered files:
