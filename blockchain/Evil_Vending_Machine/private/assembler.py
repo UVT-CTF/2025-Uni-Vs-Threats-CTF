@@ -26,14 +26,16 @@ evm_code = '''PUSH2 0x951d
     XOR
     PUSH3 0x881ba
     MSTORE
-    MLOAD 0x7c7
-    MLOAD 0x7a4
+    PUSH2 0x7c7
+    MLOAD
+    PUSH2 0x7a4
+    MLOAD
     MUL
     EQ
-    PUSH1 0x42
+    PUSH1 0x48
     JUMPI
     SELFDESTRUCT
     STOP
 '''
-
-print(assemble_hex(evm_code))
+bytecode = assemble_hex(evm_code)
+print(bytecode)

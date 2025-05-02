@@ -3,8 +3,11 @@
 
 ### Description
 This vending machine only accepts cryptocurrency. Luckily, I got my hands on this awesome bytecode. Think it can help me grab a bite?
-`0x61951d636063eb0c04613b83346063613f7260b4080203602c611af3026107a4526207d0b961ab52016107c75262026a8561952d18620881ba5251510214604257ff00`
+
+`0x61951d636063eb0c04613b83346063613f7260b4080203602c611af3026107a4526207d0b961ab52016107c75262026a8561952d18620881ba526107c7516107a4510214604857ff00`
+
 Find the callvalue in hexadecimal (lowercase).
+
 Flag format: UVT{0xdeadbeef}
 
 ### Flag
