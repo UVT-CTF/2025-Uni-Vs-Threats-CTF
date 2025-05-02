@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y ca-certificates && apt-get clean
 # Copy built server and public folder
 COPY --from=builder /build/server /server
 COPY --from=builder /build/public /public
-COPY --from=builder /build/secret /secret
+COPY --from=builder /build/flag.txt /flag.txt
 COPY entrypoint.sh /entrypoint.sh
 
 # Give permissions

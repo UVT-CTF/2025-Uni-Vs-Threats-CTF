@@ -123,7 +123,7 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cleanPath := "/public/" + filepath.Clean(path)
+	cleanPath := "./public/" + filepath.Clean(path)
 
 	// Make sure the folder is not leaked
 	if strings.Contains(strings.ToLower(cleanPath), "self") {
@@ -134,7 +134,7 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	// Check if the file exists and is not a directory
 	fileInfo, err := os.Stat(cleanPath)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Cannot stat file: %v", err), http.StatusNotFound)
+		http.Error(w, fmt.Sprintf("Cannot stat file: %v", path), http.StatusNotFound)
 		return
 	}
 

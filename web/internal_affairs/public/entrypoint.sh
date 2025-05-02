@@ -6,8 +6,9 @@ mkdir -p /tmp/$RAND_DIR
 
 # Move server and public inside the random folder
 # So nobody can guess the path
-cp /server /tmp/$RAND_DIR/
-cp -r /public /tmp/$RAND_DIR/
+mv /server /tmp/$RAND_DIR/
+mv /public /tmp/$RAND_DIR/
+mv /flag.txt /tmp/$RAND_DIR/flag_$RAND_DIR.txt
 
 # Move into that random directory
 cd /tmp/$RAND_DIR

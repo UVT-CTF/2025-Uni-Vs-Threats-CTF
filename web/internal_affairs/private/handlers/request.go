@@ -3,34 +3,57 @@ package handlers
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http"
+	"net/url"
+	"strings"
 )
 
 // RequestHandler handles the /request/* route
 func RequestHandler(w http.ResponseWriter, r *http.Request) {
-	if len(r.URL.Path) <= len("/request/") {
+	// Extract the raw request URI and strip off any query string
+	raw := r.RequestURI
+	if i := strings.Index(raw, "?"); i != -1 {
+		raw = raw[:i]
+	}
+
+	const prefix = "/request/"
+	// Check that there is something after "/request/"
+	if len(raw) <= len(prefix) {
 		http.Error(w, "Missing URL parameter", http.StatusBadRequest)
 		return
 	}
 
-	targetPath := r.URL.Path[len("/request/"):]
+	// Raw target (still percent-encoded)
+	rawTarget := raw[len(prefix):]
 
-	var targetURL string
-
-	// Special handling for internal services
-	if targetPath == "whoami" || targetPath == "disk" {
-		targetURL = "http://127.0.0.1:40048/" + targetPath
-	} else {
-		targetURL = targetPath
-
+	// Allow exactly one level of percent-encoding, reject double-encoding
+	decodedTarget, err := url.PathUnescape(rawTarget)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Invalid URL encoding: %v", err), http.StatusBadRequest)
+		return
+	}
+	if strings.Contains(decodedTarget, "%") {
+		http.Error(w, "Double-encoded sequences are not allowed", http.StatusBadRequest)
+		return
 	}
 
+	// Build the actual target URL
+	var targetURL string
+	if decodedTarget == "whoami" || decodedTarget == "disk" {
+		targetURL = "http://127.0.0.1:40048/" + decodedTarget
+	} else {
+		targetURL = decodedTarget
+	}
+
+	// Determine method (default GET)
 	method := r.URL.Query().Get("method")
 	if method == "" {
 		method = "GET"
 	}
 
 	client := &http.Client{}
+	log.Printf("Forwarding request to %s with method %s", targetURL, method)
 	req, err := http.NewRequest(method, targetURL, nil)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error creating request: %v", err), http.StatusInternalServerError)
