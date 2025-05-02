@@ -105,6 +105,7 @@ void intro()
 const char* FLAG = "UVT{f4ke_fl4g_f0r_t3st1ng}";
 int main()
 {
+    setvbuf(stdout, NULL, _IONBF, 0);
     prng_state state;
     uint64_t seed;
 
