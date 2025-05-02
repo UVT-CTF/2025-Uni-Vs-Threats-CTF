@@ -13,6 +13,7 @@ sudo python3 vol.py -f cornelias-memory.raw windows.filescan | grep -i sawat
 ```
 
 3. Dump the identified files (replacing `<address>` with the virtual address):
+First, we can create a `dumps` directory to output the files there in order to be easier to navigate. TGhen, we mention this directory as the output path:
 ```
 sudo python3 vol.py -f cornelias-memory.raw -o dumps windows.dumpfiles --virtaddr <address>
 ```
