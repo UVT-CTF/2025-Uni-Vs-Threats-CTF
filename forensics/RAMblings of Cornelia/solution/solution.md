@@ -21,15 +21,13 @@ sudo python3 vol.py -f cornelias-memory.raw -o dumps windows.dumpfiles --virtadd
 Recovered files:
 
 - `master-plan.txt`
-- `kind-reminder.txt`
-- `README-first.txt` (these 3 from `cornelia` search)
+- `kind-reminder.txt` (these 2 from `cornelia` search)
 - `company-intel.7z` (from `sawat` search)
 
 4. Read the text files:
 ```
 cat dumps/file._master-plan_.dat  
 cat dumps/file._kind-reminder_.dat  
-cat dumps/file._README_.dat
 ```
 
 The password is found in one of these files:
@@ -39,7 +37,7 @@ The password is found in one of these files:
 
 5. Extract the archive:
 ```
-7z x dumps/file._company-intel_.dat -p"!!c4nN0L0ng3rIgn0r3Th1s"
+7z x dumps/<archive-file-name>.dat -p"!!c4nN0L0ng3rIgn0r3Th1s"
 ```
 
 The archive contains:
