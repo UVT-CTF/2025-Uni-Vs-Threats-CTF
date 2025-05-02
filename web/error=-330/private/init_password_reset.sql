@@ -16,8 +16,15 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Sample data with enhanced security (but vulnerable setup)
 INSERT INTO users (username, password, email, is_admin) VALUES 
-('admin', 'S0_5tR1ng5_4r3_m0r3_tHaN_qu3r13s}', 'admin@sqli-challenge.com', TRUE),
+('admin', 'S0_5tR1ng5_4r3_m0r3_tHaN_qu3r13s_uiewhks}', 'admin@sqli-challenge.com', TRUE),
 ('user1', 'password123', 'user1@example.com', FALSE),
 ('user2', 'qwerty', 'user2@example.com', FALSE),
 ('user3', 'alabalaportocala', 'user@3example.com', TRUE);
 
+
+-- lock down search_user to read-only
+REVOKE ALL PRIVILEGES, GRANT OPTION
+  ON password_reset.* FROM 'search_user'@'%';
+GRANT SELECT
+  ON password_reset.* TO 'search_user'@'%';
+FLUSH PRIVILEGES;

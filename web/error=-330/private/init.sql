@@ -115,3 +115,10 @@ Your secret’s found in the echo.'),
 ('Some queries aren’t questions.'),
 ('you speak in poisoned syntax');
               
+
+-- lock down search_user to read-only
+REVOKE ALL PRIVILEGES, GRANT OPTION
+  ON sqli_challenge.* FROM 'search_user'@'%';
+GRANT SELECT
+  ON sqli_challenge.* TO 'search_user'@'%';
+FLUSH PRIVILEGES;
