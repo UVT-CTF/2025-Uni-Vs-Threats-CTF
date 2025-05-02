@@ -123,7 +123,7 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cleanPath := "/" + filepath.Clean(path)
+	cleanPath := "/public/" + filepath.Clean(path)
 
 	// Make sure the folder is not leaked
 	if strings.Contains(strings.ToLower(cleanPath), "self") {
