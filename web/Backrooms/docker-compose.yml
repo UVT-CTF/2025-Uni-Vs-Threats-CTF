@@ -7,5 +7,5 @@ services:
       - PORT=8080
       - FLAG="UVT{st0p_sn00p1n9_4r0und}"
     ports:
-      - "8080:8080"
+      - "57291:8080"
     restart: always

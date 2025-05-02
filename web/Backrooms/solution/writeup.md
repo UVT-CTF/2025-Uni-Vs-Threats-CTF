@@ -11,7 +11,6 @@ See solution.js and payload.html
 
 - Some endpoint is required to delay page loading (e.g. https://httpbin.org/delay/5)
 - Some endpoint is required for data exfiltration (e.g. https://webhook.site/)
-- You will need to enable wildcard CORS if using webhook.site
 
 ## Step 3: Polluting the log file
 

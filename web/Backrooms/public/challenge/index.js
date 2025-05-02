@@ -5,6 +5,7 @@ import { randomBytes } from 'crypto';
 import cookieParser from 'cookie-parser';
 
 const app = express();
+const intraApp = express();
 
 const PORT = process.env.PORT || 8080;
 const FLAG = process.env.FLAG || 'UVT{a_flag_goes_here}';
@@ -121,7 +122,7 @@ function disableCors(res) {
 }
 
 // TODO: remove next sprint
-app.get('/admin/doHttpReq', (req, res) => {
+intraApp.get('/admin/doHttpReq', (req, res) => {
     try {
         disableCors(res);
         if ((`${req.headers.origin}` != 'null'
@@ -166,6 +167,10 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Notes App is up and running on port ${PORT}!`);
+});
+
+intraApp.listen(80, () => {
+    console.log(`Admin Server is running!`);
 });
 
 // Gotta stay safe out here..
