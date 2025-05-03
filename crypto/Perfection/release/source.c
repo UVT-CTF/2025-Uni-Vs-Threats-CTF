@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define n 25
 #define m 7
@@ -88,7 +89,7 @@ void xor_with_prng(const uint8_t *data, size_t len, void *state)
         uint32_t rnd = random_uint32(state);
         for (int j = 0; j < 4 && (i + j) < len; j++) 
         {
-            uint8_t xored = data[i + j] ^ ((rnd >> (8 * j)) & 0xFF);
+            uint8_t xored = data[i + j] ^ ((rnd >> (8 * (3 - j))) & 0xFF);
             printf("%02x", xored);
         }
     }
@@ -110,6 +111,7 @@ int main()
     uint64_t seed;
 
     memcpy(&seed, FLAG + 4, 8);
+    seed += time(NULL);
     initialize_state(&state, seed);
 
     intro();
