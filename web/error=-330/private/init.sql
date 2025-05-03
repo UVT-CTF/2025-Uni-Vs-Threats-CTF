@@ -1,20 +1,22 @@
+-- ./private/init.sql
+
 CREATE DATABASE IF NOT EXISTS sqli_challenge;
 USE sqli_challenge;
 
-
--- Your existing products table
+-- products table
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
     description TEXT
 );
 
--- Your existing secrets table
+-- secrets table
 CREATE TABLE IF NOT EXISTS secrets (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    flag VARCHAR(300) NOT NULL
+    flag TEXT NOT NULL
 );
+
 
 -- Your existing products data
 INSERT INTO products (name, price, description) VALUES 
@@ -101,24 +103,14 @@ INSERT INTO secrets (flag) VALUES
 ('Some queries fetch data. Others fetch power.')  ,
 ('You don’t exploit the database. You seduce it—with carefully crafted strings and the promise of chaos.'),
 ('UVT{Th3_sy5t3M_7ru5Ts_1tS_oWn_9r4Mmar_..._'),
-('In shadows deep the blind man calls,
-He taps the keys and nothing stalls.
-But when he asks in silent night,
-The world holds breath—then springs to life.
-
-If stillness lingers five heartbeats long,
-You’ve whispered truths with hidden song.
-When time itself convulses slow,
-Your secret’s found in the echo.'),
+('In shadows deep the blind man calls,He taps the keys and nothing stalls.But when he asks in silent night,The world holds breath—then springs to life.If stillness lingers five heartbeats long,You’ve whispered truths with hidden song.When time itself convulses slow,Your secret’s found in the echo.'),
 ('You don`t query the system—you interrogate it.'),
 ('The database wasn’t built for lies'),
 ('Some queries aren’t questions.'),
 ('you speak in poisoned syntax');
-              
 
--- lock down search_user to read-only
-REVOKE ALL PRIVILEGES, GRANT OPTION
-  ON sqli_challenge.* FROM 'search_user'@'%';
-GRANT SELECT
-  ON sqli_challenge.* TO 'search_user'@'%';
+-- ─── NOW: DROP the auto-created user and RECREATE it with only SELECT on sqli_challenge ───
+DROP USER IF EXISTS 'search_user'@'%';
+CREATE USER     'search_user'@'%' IDENTIFIED BY 'passwordidk';
+GRANT SELECT    ON sqli_challenge.* TO 'search_user'@'%';
 FLUSH PRIVILEGES;

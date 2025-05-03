@@ -61,7 +61,7 @@ function cleanUploads($path, $minutes = 2) {
     }
 }
 
-function randomString($length = 12) {
+function randomString($length = 6) {
     return substr(str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789"), 0, $length);
 }
 

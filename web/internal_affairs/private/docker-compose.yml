@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ctfserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ctfserver:latest
+    container_name: ctfserver
+    ports:
+      - "40048:40048"
+    networks:
+      - go-net
+
+networks:
+  go-net:
+    driver: bridge

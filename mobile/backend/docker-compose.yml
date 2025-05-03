@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  backend:
+    build: .
+    ports:
+      - "42234:42234"
+    # Uncomment for live-reload during development
+    # command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    # volumes:
+    #   - .:/app

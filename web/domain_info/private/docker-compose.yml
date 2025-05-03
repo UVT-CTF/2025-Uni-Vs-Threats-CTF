@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  domain_info:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: domain_info:latest
+    container_name: domain_info
+    ports:
+      - "40049:80"
