@@ -10,5 +10,5 @@ See if you can solve the case, we are counting on you!
 ### Flag
 <details>
   <summary>Click to reveal the flag</summary>
-  UVT{D3l3t3d_But_N0t_D3stRoyEd}
+  UVT{D3l3t3d_But_N0t_D3stRoy3d}
 </details>
