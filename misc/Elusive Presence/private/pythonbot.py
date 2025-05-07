@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 # --- Configuration ---
 # TOKEN = os.getenv('DISCORD_TOKEN')
-TOKEN = 'MTM2ODI4MzkwMDQ5Njk3Mzg3NA.GU7LQK.m-wvPUmazNbr8OCCRHb-S_NyfVEPvJa3oZDczg' # Replace with your actual bot token
+TOKEN = 'YOUR_BOT_TOKEN' # Replace with your actual bot token
 if not TOKEN or TOKEN == 'YOUR_BOT_TOKEN':
     log.error("Discord bot token not found. Please set the TOKEN variable.")
     exit()
