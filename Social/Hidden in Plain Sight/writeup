@@ -1,5 +1,5 @@
 Continue the conversation that you started with Larry for the first challenge. Tell him that you heard about his new laptop and start flattering him again.
-For example, say that he has great taste and you also want to get a laptop as cool as he has. Once he sends you the picture of his desk, analyze the pic and 
-find his credentials on the laptop's screen. You will see that the credentials are encrypted. The description mentions a repeating key shift cipher and if you 
-look closely, he mentions in his LinkedIn description that the only key to surviving sprints is his dog Bruno, so that must be the decryption key. Go on Cyberchef 
-and decode the username and password with Vigenere decoding, using the same key (Bruno) for both of them.
+For example, say that he has great taste, you also want to get a laptop as cool as he has, and ask about the specifications of the laptop. Once he sends you
+the picture of his desk, analyze the pic and find his credentials on the laptop's screen. You will see that the credentials are encrypted. The description 
+mentions a repeating key shift cipher and if you look closely, he mentions in his LinkedIn description that the only key to surviving sprints is his dog Bruno, 
+so that must be the decryption key. Go on Cyberchef and decode the username and password with Vigenere decoding, using the same key (Bruno) for both of them.
