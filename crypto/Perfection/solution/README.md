@@ -1,6 +1,6 @@
 # Solution
 
-For the solution I just modified the source code from [randcrack](https://github.com/tna0y/Python-random-module-cracker) (because I'm lazy) since the algorithm in source.py is based on Mersenne Twister.
+For the solution I just modified the source code from [randcrack](https://github.com/tna0y/Python-random-module-cracker) (because I'm lazy) since the algorithm from this challenge is based on Mersenne Twister.
 
 I recommend reading [this](https://blog.ollien.com/posts/reverse-mersenne-twister/) before reading the solution if you are unfamiliar with how Mersenne Twister works.
 
