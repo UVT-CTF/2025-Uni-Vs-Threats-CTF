@@ -15,6 +15,7 @@ conn.recvuntil(b"Press enter when you're ready!")
 conn.send(b"\n")
 
 for level in range(100):
+    # recv the first two lines
     conn.recvline()
     conn.recvline()
 
@@ -28,6 +29,8 @@ for level in range(100):
                     answer[(j - cliff_size) // note_size] = notes[i]
 
     conn.sendline(" ".join(answer).encode())
+
+    # recv the "congratulations" message
     conn.recvline()
 
 conn.interactive()
