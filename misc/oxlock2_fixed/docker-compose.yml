@@ -1,0 +1,7 @@
+services:
+  0xLOcK:
+    build: .
+    image: 0xl0ck-0xlock
+    ports:
+      - "8654:8654"  # Host:Container port mapping
+    restart: always

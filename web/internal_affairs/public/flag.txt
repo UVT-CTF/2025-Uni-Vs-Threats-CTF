@@ -1,1 +1,1 @@
-UVT{fake_flag}
+UVT{fake}

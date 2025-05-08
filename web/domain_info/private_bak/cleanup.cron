@@ -1,2 +1,0 @@
-# run cleanup_uploads.sh as www-data every 2 minutes
-*/2 * * * * www-data /usr/local/bin/cleanup_uploads.sh

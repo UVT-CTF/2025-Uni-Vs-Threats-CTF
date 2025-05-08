@@ -1,0 +1,3 @@
+Decompile using jadx-gui (or see by running dynamic)
+
+Find that C Shared object is loaded -> reverse it -> find hidden path -> request it 

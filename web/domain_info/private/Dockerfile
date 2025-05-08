@@ -27,10 +27,10 @@ RUN chown -R root:root /var/www/html && \
     chmod 777 /var/www/html/uploads
 
 # Copy flag outside webroot (optional, for extra protection)
-COPY flag.txt /flag.txt
+RUN mv flag.txt /flag.txt
 
 # Expose HTTP
-EXPOSE 80
+EXPOSE 81
 
 # Start Apache
 CMD ["apache2-foreground"]
