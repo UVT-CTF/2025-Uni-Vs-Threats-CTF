@@ -1,4 +1,5 @@
 from pwn import *
+from Crypto.Util.number import long_to_bytes
 
 class RandGuesser:
 
@@ -246,7 +247,7 @@ class RandGuesser:
 
     
 
-conn = remote("localhost", 60006)
+conn = remote("91.99.1.179", 60006)
 
 print(conn.recvuntil(b"That's why I have no problem tossing out encrypted secrets like this one: \n"))
 
@@ -267,8 +268,12 @@ for sample in samples:
     guessr.submit(sample)
 
 
-print(guessr.offset(-25))
-print(guessr.offset(-6))
-print(guessr.predict_getrandbits(32))
+guessr.offset(-25)
+guessr.offset(-6)
+
+encrytpted_flag = bytes.fromhex(encrytpted_flag.decode())
+
+for i in range(len(encrytpted_flag) // 4):
+    print(xor(encrytpted_flag[i*4:i*4+4], long_to_bytes(guessr.predict_getrandbits(32))).decode(), end="")
 
 conn.interactive()
