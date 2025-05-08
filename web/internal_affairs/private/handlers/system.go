@@ -10,8 +10,8 @@ import (
 	"strings"
 )
 
-// UserHandler returns the current user so i don't forget who i am
-// and to make sure the server is running as the correct user
+
+
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 
 	out, err := exec.Command("whoami").Output()
@@ -57,7 +57,7 @@ func LinkHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Resolved path: %s\n", target)
 }
 
-// DiskHandler shows disk usage
+
 func DiskHandler(w http.ResponseWriter, r *http.Request) {
 
 	out, err := exec.Command("df", "-h").Output()
@@ -70,7 +70,7 @@ func DiskHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(out)
 }
 
-// ListHandler lists files in the specified folder
+
 func ListHandler(w http.ResponseWriter, r *http.Request) {
 
 	if !IsLocalhost(r) {
@@ -104,7 +104,7 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// ViewHandler views the content of a specific file
+
 func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	if !IsLocalhost(r) {
 		http.Error(w, "Forbidden: /view endpoint accessible only from localhost", http.StatusForbidden)
@@ -125,13 +125,13 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	cleanPath := "./public/" + filepath.Clean(path)
 
-	// Make sure the folder is not leaked
+
 	if strings.Contains(strings.ToLower(cleanPath), "self") {
 		http.Error(w, "We don't leak the folder", http.StatusBadRequest)
 		return
 	}
 
-	// Check if the file exists and is not a directory
+
 	fileInfo, err := os.Stat(cleanPath)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cannot stat file: %v", path), http.StatusNotFound)

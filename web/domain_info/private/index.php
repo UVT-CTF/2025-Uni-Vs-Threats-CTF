@@ -78,26 +78,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Extra simple validation
     if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN)) {
         die("<p style='color:red;'>❌ Invalid Hostname</p>");
     }
 
-    // Safe escaping
     $host = escapeshellarg($host);
     $port = escapeshellarg($port);
     $query = escapeshellarg($query);
 
-    // Create uploads folder if not exists
     $uploadDir = __DIR__ . '/uploads';
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0755, true);
     }
 
-    // Cleanup old files
     cleanUploads($uploadDir, 2); // Delete files older than 2 minutes
 
-    // Randomize file name
     if (empty($savefile)) {
         $savefile = "output.txt";
     }
@@ -105,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $finalName = $randomPrefix . "_" . basename($savefile);
     $savepath = $uploadDir . '/' . $finalName;
 
-    // Execute
     $command = "whois -h " . $host . " -p " . $port . " " . $query  . " >  " . escapeshellarg($savepath);
     system($command);
     echo "Command: <pre>" . htmlspecialchars($command) . "</pre>";

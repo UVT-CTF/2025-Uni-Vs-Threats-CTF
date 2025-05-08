@@ -11,7 +11,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Expose the port FastAPI will run on
 EXPOSE 42234
 
 # Run the Uvicorn server

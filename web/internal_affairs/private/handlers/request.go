@@ -9,25 +9,24 @@ import (
 	"strings"
 )
 
-// RequestHandler handles the /request/* route
+
 func RequestHandler(w http.ResponseWriter, r *http.Request) {
-	// Extract the raw request URI and strip off any query string
 	raw := r.RequestURI
 	if i := strings.Index(raw, "?"); i != -1 {
 		raw = raw[:i]
 	}
 
 	const prefix = "/request/"
-	// Check that there is something after "/request/"
+
 	if len(raw) <= len(prefix) {
 		http.Error(w, "Missing URL parameter", http.StatusBadRequest)
 		return
 	}
 
-	// Raw target (still percent-encoded)
+
 	rawTarget := raw[len(prefix):]
 
-	// Allow exactly one level of percent-encoding, reject double-encoding
+
 	decodedTarget, err := url.PathUnescape(rawTarget)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Invalid URL encoding: %v", err), http.StatusBadRequest)

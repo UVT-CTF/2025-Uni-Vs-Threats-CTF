@@ -7,27 +7,23 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-# ─── Logging Setup ─────────────────────────────────────────────────────────────
 logger = logging.getLogger("uvt_ctf")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
-# ─── App Initialization ────────────────────────────────────────────────────────
 app = FastAPI(
     title="UVT CTF 2025 API",
     version="1.0.0",
     description="Simple backend for UVT CTF with jokes, contest info, and flag retrieval"
 )
 
-# ─── CORS (if you need it) ─────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 🔒 In production, lock this down to your frontend URL(s)
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ─── Response Models ───────────────────────────────────────────────────────────
 class JokeResponse(BaseModel):
     id: int
     joke: str
@@ -41,7 +37,6 @@ class CTFInfo(BaseModel):
 class FlagResponse(BaseModel):
     flag: str
 
-# ─── In-Memory Data ────────────────────────────────────────────────────────────
 JOKES: List[str] = [
     "Why do programmers prefer dark mode? Because light attracts bugs!",
     "I told my computer I needed a break, and it said 'No problem – I'll go to sleep.'",
@@ -55,10 +50,7 @@ CTF_INFO = CTFInfo(
     url="https://cybersec.uvt.ro/events/UniVsThreats25/"
 )
 
-# Fetch the real flag from an environment variable, fallback to a placeholder
 FLAG = os.getenv("CTF_FLAG", "UVT{m0b1l3_.s0_m4y_c0nt4in_s3ns1tiv3_1nf0}")
-
-# ─── Endpoints ────────────────────────────────────────────────────────────────
 
 @app.get(
     "/jokes",
